@@ -7,7 +7,8 @@ export default function HeadComponent() {
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <meta name="theme-color" content="#000000" />
 
-      <title>Solana Pay Store</title>
+      <title>Crypto Bladez Store</title>
+      <link rel="icon" href="/favicon.ico" />
       <meta name="title" content="Solana Pay Store" />
       <meta name="description" content="Buy items on my store using Solana Pay!" />
 
