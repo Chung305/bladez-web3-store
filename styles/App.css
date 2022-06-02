@@ -167,6 +167,16 @@ button:disabled {
   align-items: center;
   margin-top: 20px;
 }
+
+.free-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #deabfe;
+  height: 50px;
+  width: 60%;
+  box-shadow: 3px 3px #fcf27a;
+}
 /* KeyFrames */
 @-webkit-keyframes gradient-animation {
   0% {

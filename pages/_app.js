@@ -22,10 +22,10 @@ import "../styles/App.css";
 
 
 function App({ Component, pageProps }) {
-  //Network change  'devnet', 'testnet', or 'mainnet-beta'
+  // Network change  'devnet', 'testnet', or 'mainnet-beta'
   const network = WalletAdapterNetwork.Devnet;
 
-  //provide a custom RPC endpoint
+  // provide a custom RPC endpoint
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
 
   const wallets = useMemo(

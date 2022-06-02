@@ -36,6 +36,7 @@
 
 .navlink{
     color: #475569;
+    font-size: small;
     text-transform: uppercase;
 }
 
@@ -97,6 +98,7 @@
 
     .navmenu.active {
         left: 0;
+        z-index: 99;
     }
 
     .navitem {
