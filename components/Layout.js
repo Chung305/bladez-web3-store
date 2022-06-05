@@ -15,9 +15,9 @@ export default function Layout({ children }) {
 
   //page data for <li> prop
   const pages = [
-    { id: 0, page: "/", name: "Shop" },
+    { id: 0, page: "/shop", name: "Shop" },
     { id: 1, page: "/team", name: "Team" },
-    { id: 2, page: "/contact", name: "Contact" },
+    { id: 2, page: "/about", name: "About" },
   ];
 
   //render when wallet not connected
@@ -93,6 +93,10 @@ export default function Layout({ children }) {
             */}
             {publicKey ? renderDashboardLink() : null}
 
+            {/* 
+              implement {render an admin link to admin wallets to view orders/transactions } 
+            */}
+
             <li className={styles.navitem}>
               {publicKey
                 ? renderConnectedContainer()
@@ -136,6 +140,7 @@ export default function Layout({ children }) {
           </div>
           <div className={styles.socialContainer}>
             <ul>
+              {/** add social links to new tabs */}
               <li>
                 <Image src={"/social/discord.png"} width={30} height={30} />
               </li>

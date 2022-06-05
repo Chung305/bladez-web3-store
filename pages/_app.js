@@ -14,12 +14,10 @@ import {
 } from "@solana/wallet-adapter-wallets";
 import { clusterApiUrl } from "@solana/web3.js";
 import Layout from "../components/Layout";
-import HeadComponent from '../components/Head';
+import HeadComponent from "../components/Head";
 
 import "../styles/globals.css";
 import "../styles/App.css";
-
-
 
 function App({ Component, pageProps }) {
   // Network change  'devnet', 'testnet', or 'mainnet-beta'
@@ -40,21 +38,17 @@ function App({ Component, pageProps }) {
   );
 
   return (
-    
-        <ConnectionProvider endpoint={endpoint}>
-          <WalletProvider wallets={wallets} autoConnect>
-            <WalletModalProvider>
-              <HeadComponent />
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </WalletModalProvider>
-          </WalletProvider>
-        </ConnectionProvider>
-    
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider wallets={wallets} autoConnect>
+        <WalletModalProvider>
+          <HeadComponent />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </WalletModalProvider>
+      </WalletProvider>
+    </ConnectionProvider>
   );
 }
-
-
 
 export default App;
