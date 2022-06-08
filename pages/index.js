@@ -9,7 +9,7 @@ const App = () => {
     <div className="App">
       <div className="container">
         <header className="header-container">
-          <p className="header"> Crypto Bladez Store</p>
+          <p className="header"> Crypto Bladez Club</p>
           <p className="sub-text">Where Crypto and Blading Meet</p>
         </header>
 

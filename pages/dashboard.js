@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey } from "@solana/web3.js";
 import Orders from "../components/dashboard-components/Orders";
+import SolanaMarketInfo from "../components/dashboard-components/SolanaMarketInfo";
 
 const Dashboard = () => {
   const { publicKey } = useWallet();
@@ -19,9 +20,9 @@ const Dashboard = () => {
   }, [publicKey]);
 
   return (
-    <div>
-      <p>{publicKey.toString()}</p>
-      <h3>Past Orders</h3>
+    <div className="page-container">
+      <SolanaMarketInfo />
+      <h2>Past Orders</h2>
       {userOrders.map((orders) => (
         <Orders key={orders.orderId} orders={orders} />
       ))}

@@ -45,7 +45,10 @@
 }
 
 .mainContainer{
-    padding: 0 2em;
+    min-height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
 }
 
 /* Footer classes */

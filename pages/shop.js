@@ -26,10 +26,12 @@ const Shop = () => {
   );
 
   return (
-    <div>
-      {publicKey
-        ? renderFreeDownload()
-        : "Connect Wallet for free team Blade PNG"}
+    <div className="page-container">
+      {publicKey ? (
+        renderFreeDownload()
+      ) : (
+        <p>Connect Wallet for free team Blade PNG</p>
+      )}
     </div>
   );
 };

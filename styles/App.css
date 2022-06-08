@@ -1,5 +1,6 @@
 .App {
   height: 100vh;
+  width: 100%;
   background-color: rgb(20, 20, 20);
   text-align: center;
   overflow: hidden;
@@ -13,6 +14,11 @@
   padding: 0 30px 0 30px;
   color: white;
   position: relative;
+}
+.page-container {
+  width: 100%;
+  background-color: black;
+  margin: 0 10%;
 }
 
 .authed-container {
@@ -210,5 +216,15 @@ button:disabled {
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+
+/*
+first breakpoint: 768px
+*/
+@media only screen and (max-width: 768px) {
+  .page-container{
+    margin: 0 5%;
   }
 }

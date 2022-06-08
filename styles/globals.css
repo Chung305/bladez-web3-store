@@ -19,3 +19,14 @@ a {
 * {
   box-sizing: border-box;
 }
+
+p {
+  color: white;
+}
+
+h1, h2 {
+  color: #fcf27a;
+}
+h3, h4, h5, h6 {
+  color: #deabfe
+}

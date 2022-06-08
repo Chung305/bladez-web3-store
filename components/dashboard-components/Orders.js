@@ -4,20 +4,18 @@ import styles from "../../styles/Orders.module.css";
 export default function Orders({ orders }) {
   return (
     <div className={styles.order_container}>
-      <div>
+      <div className={styles.data_container}>
         <p>
-          <a>Buyer:</a>
+          <span>Buyer:</span>
         </p>
         <p>
-          <a>{orders.buyer}</a>
+          <span>
+            <a>{orders.buyer}</a>
+          </span>
         </p>
-      </div>
-      <div>
+        <p>Order ID:</p>
         <p>
-          <a>Order ID:</a>
-        </p>
-        <p>
-          <a>{orders.orderID}</a>
+          <a className={styles.linkbreak}>{orders.orderID}</a>
         </p>
       </div>
       <div>
