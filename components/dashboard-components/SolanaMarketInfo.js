@@ -33,6 +33,7 @@ export default function SolanaMarketInfo() {
         <div className={styles.dataContainer}>
           <h3>Market Cap</h3>
           <p>
+            $
             {(
               Math.round(
                 solanaMarketInfo && solanaMarketInfo.solana.usd_market_cap * 100
@@ -43,6 +44,7 @@ export default function SolanaMarketInfo() {
         <div className={styles.dataContainer}>
           <h3>24h Volume</h3>
           <p>
+            $
             {(
               Math.round(
                 solanaMarketInfo && solanaMarketInfo.solana.usd_24h_vol * 100

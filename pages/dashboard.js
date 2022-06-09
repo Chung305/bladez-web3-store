@@ -22,6 +22,10 @@ const Dashboard = () => {
   return (
     <div className="page-container">
       <SolanaMarketInfo />
+      <div>
+        <h2>NFTs</h2>
+        <p>Coming Soon</p>
+      </div>
       <h2>Past Orders</h2>
       {userOrders.map((orders) => (
         <Orders key={orders.orderId} orders={orders} />

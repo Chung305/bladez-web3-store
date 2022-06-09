@@ -17,8 +17,10 @@
 }
 .page-container {
   width: 100%;
-  background-color: black;
   margin: 0 10%;
+}
+.page-container h2 {
+  text-align: center;
 }
 
 .authed-container {
