@@ -1,35 +1,129 @@
 import React, { useState, useEffect } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { PublicKey } from "@solana/web3.js";
 import Orders from "../components/dashboard-components/Orders";
 import SolanaMarketInfo from "../components/dashboard-components/SolanaMarketInfo";
+import AccountNfts from "../components/dashboard-components/AccountNfts";
+import { getWalletNfts } from "../lib/meApi";
+import CreateProduct from "../components/CreateProduct";
+import { addUser } from "../lib/api";
+
+import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 
 const Dashboard = () => {
   const { publicKey } = useWallet();
   const [userOrders, setUserOrders] = useState([]);
+  const [nfts, setNfts] = useState([]);
 
+  const isOwner = publicKey
+    ? publicKey.toString() === process.env.NEXT_PUBLIC_MANAGEMENT
+    : false;
+  const [creating, setCreating] = useState(false);
+
+  const [activeTab, setActiveTab] = useState("1");
+
+  // check if user exists if not created new user in databse
   useEffect(() => {
-    if (publicKey) {
-      fetch(`../api/orders?buyer=${publicKey.toString()}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setUserOrders(data);
-          console.log(data);
-        });
+    try {
+      if (publicKey) {
+        console.log(publicKey);
+        addUser(publicKey);
+      }
+    } catch (err) {
+      console.log("error", err);
     }
   }, [publicKey]);
 
+  // fetching wallet Nfts if wallet is connected
+  useEffect(() => {
+    const fetchNfts = async () => {
+      if (publicKey) {
+        const getNfts = await getWalletNfts(publicKey.toString());
+        setNfts(getNfts);
+      }
+    };
+    fetchNfts();
+  }, [publicKey]);
+
+  // fetching user past orders
+  // useEffect(() => {
+  //   try {
+  //     if (publicKey) {
+  //       try {
+  //         fetch(`../api/orders?buyer=${publicKey.toString()}`)
+  //           .then((response) => response.json())
+  //           .then((data) => {
+  //             setUserOrders(data);
+  //           });
+  //       } catch (err) {
+  //         console.log(err);
+  //       }
+  //     }
+  //   } catch (err) {
+  //     // 👇️ SyntaxError: Unexpected end of JSON input
+  //     console.log("error something happened");
+  //     console.log("error", err);
+  //   }
+  // }, [publicKey]);
+
   return (
     <div className="page-container">
-      <SolanaMarketInfo />
+      <div></div>
       <div>
-        <h2>NFTs</h2>
-        <p>Coming Soon</p>
+        {isOwner && (
+          <button onClick={() => setCreating(!creating)}>
+            {creating ? "Close" : "Create Product"}
+          </button>
+        )}
+        {creating && <CreateProduct />}
       </div>
-      <h2>Past Orders</h2>
-      {userOrders.map((orders) => (
-        <Orders key={orders.orderId} orders={orders} />
-      ))}
+
+      <SolanaMarketInfo />
+
+      <Nav tabs>
+        <NavItem>
+          <NavLink
+            className={activeTab == "1" ? "active" : ""}
+            onClick={() => setActiveTab("1")}
+          >
+            Wallet
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink
+            className={activeTab == "2" ? "active" : ""}
+            onClick={() => setActiveTab("2")}
+          >
+            NFTs
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink
+            className={activeTab == "3" ? "active" : ""}
+            onClick={() => setActiveTab("3")}
+          >
+            Past Orders
+          </NavLink>
+        </NavItem>
+      </Nav>
+      <TabContent activeTab={activeTab}>
+        <TabPane tabId="1">tab index wallet info</TabPane>
+        <TabPane tabId="2">
+          <div>
+            <div className="nft-container">
+              {publicKey ? (
+                nfts.map((nft) => <AccountNfts key={nft.name} nfts={nft} />)
+              ) : (
+                <p>Connect Wallet</p>
+              )}
+            </div>
+          </div>
+        </TabPane>
+        <TabPane tabId="3">
+          {/* {userOrders.map((orders) => (
+            <Orders key={orders.orderId} orders={orders} />
+          ))} */}
+        </TabPane>
+      </TabContent>
     </div>
   );
 };

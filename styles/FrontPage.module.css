@@ -1,0 +1,70 @@
+.page {
+    width: 100%;
+}
+
+.ctaButton {
+    background-color: black;
+    padding: 10px 20px;
+    margin-top: 30px;
+    border-color: #fcf27a;
+}
+
+.ctaButton:focus {
+    background-color: #fcf27a;
+    color:black;
+}
+
+.ctaButton:hover {
+    background-color: #fcf27a;
+    color:black;
+}
+
+.roadmapCard {
+    padding: 20px 10px;
+    background-color: black;
+    text-align: center;
+    margin-bottom: 20px;
+    
+
+}
+.shopCard {
+    border-radius: 0;
+    background-color: black;
+   
+}
+.separator {
+    background-color: #fcf27a;
+    height: 5px;
+    border-radius: 0;
+}
+
+.spacer {
+    margin-bottom: 20px;
+}
+
+.roadmapImage {
+    max-width: 300px;
+    margin-bottom: 10px;
+    border: #deabfe solid 3px;
+}
+
+.bannerImage {
+    width: 80%;
+    margin: auto;
+}
+
+
+/*
+weird but it works
+*/
+@media only screen and (min-width: 768px) {
+    .bannerImage {
+        width: 50%;
+    }
+}
+
+@media only screen and (min-width: 1256px) {
+    .bannerImage {
+        width: 650px;
+    }
+}

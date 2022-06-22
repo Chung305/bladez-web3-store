@@ -12,14 +12,10 @@
 .data_container {
     margin-right: 10px;
 }
-.linkbreak {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-}
 
-.linkbreak:hover {
-    color: #fcf27a;
-}
 .itemImage {
     height: 100px;
+}
+.break {
+    word-break: break-all;
 }

@@ -1,0 +1,41 @@
+.container {
+    text-align: center;
+    margin: 5px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #deabfe;
+}
+.container p {
+    font-size: 14px;
+}
+.image {
+    height: 200px;
+    width: 200px;
+}
+.modalContainer {
+    text-align: center;
+    background-color: black;
+    border: 2px solid #fcf27a;
+    border-radius: 10px;
+}
+.button {
+    font-size: 14px;
+    color: #deabfe;
+    border: 2px solid #fcf27a;
+    background-color: black;
+}
+.table {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+.tableTitle {
+    color: #fcf27a;
+}
+.tableValue {
+    color: white;
+    
+}
+.break {
+    word-break: break-all;
+}

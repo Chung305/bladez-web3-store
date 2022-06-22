@@ -9,7 +9,6 @@ export default function Orders({ orders }) {
       fetch(`/api/fetchProducts`)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           const result = data.find((data) => data.id === orders.itemID);
           console.log(result);
           setProduct(result);
@@ -26,13 +25,13 @@ export default function Orders({ orders }) {
         </p>
         <p>
           <span>
-            <a>{orders.buyer}</a>
+            <a className={styles.break}>{orders.buyer}</a>
           </span>
         </p>
         <p>Order ID:</p>
         <p>
           <a
-            className={styles.linkbreak}
+            className={styles.break}
             href={"https://solscan.io/account/" + orders.orderID}
             target="_blank"
           >

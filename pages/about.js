@@ -1,13 +1,21 @@
+import {
+  Accordion,
+  AccordionItem,
+  AccordionBody,
+  AccordionHeader,
+} from "reactstrap";
+
+import { useEffect, useState } from "react";
+import { useWallet } from "@solana/wallet-adapter-react";
+
 const About = () => {
+  const [load, setLoading] = useState(null);
+  const { publicKey } = useWallet();
+
   return (
     <div className="page-container">
-      <p>
-        Pellentesque habitant morbi tristique senectus et netus et malesuada
-        fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae,
-        ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
-        egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend
-        leo.
-      </p>
+      <h1>About Us</h1>
+      <div></div>
     </div>
   );
 };

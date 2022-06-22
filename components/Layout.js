@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
-import { PublicKey, web3 } from "@solana/web3.js";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import "@solana/wallet-adapter-react-ui/styles.css";
-import logo from "../public/logo.png";
+import logo from "../public/whiteLogo.png";
 import styles from "../styles/Layout.module.css";
-//import styles2 from '../styles/Home.module.css'
+// import { checkUser, addUser } from "../lib/api";
 
 export default function Layout({ children }) {
   // this will fetch users public key (wallet address)
@@ -142,13 +141,22 @@ export default function Layout({ children }) {
             <ul>
               {/** add social links to new tabs */}
               <li>
-                <Image src={"/social/discord.png"} width={30} height={30} />
+                <a href="https://discord.gg/uDZXTHNutV" target="_blank">
+                  <Image src={"/social/discord.png"} width={30} height={30} />
+                </a>
               </li>
               <li>
-                <Image src={"/social/instagram.png"} width={30} height={30} />
+                <a
+                  href="https://www.instagram.com/cryptobladezclub/"
+                  target="_blank"
+                >
+                  <Image src={"/social/instagram.png"} width={30} height={30} />
+                </a>
               </li>
               <li>
-                <Image src={"/social/twitter.png"} width={30} height={30} />
+                <a href="https://twitter.com/cryptobladezcbc" target="_blank">
+                  <Image src={"/social/twitter.png"} width={30} height={30} />
+                </a>
               </li>
             </ul>
           </div>

@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider       = "prisma-client-js"
+  previewFeature = ["mongodb"]
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  publicKey String   @unique
+  username  String?
+  isHolder  Boolean  @default(false)
+  createAt  DateTime @default(now())
+
+  orders Order[]
+}
+
+model Product {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  imageUri    String
+  description String
+  category    Category?
+  type        ProductType?
+  inventory   Inventory[]
+  price       Float
+  createAt    DateTime     @default(now())
+  onlyHolder  Boolean      @default(false)
+  available   Boolean      @default(true)
+
+}
+
+model Inventory {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  size      Size?
+  color     String
+  quantity  Int
+  Product   Product? @relation(fields: [productId], references: [id])
+  productId String?  @db.ObjectId
+}
+
+enum Size {
+  Xsmall
+  Small
+  Medium
+  Large
+  XLarge
+}
+
+enum Category {
+  Tshirts
+  Merchandise
+}
+
+enum ProductType {
+  DIGITAL
+  PHYSICAL
+}
+
+model Order {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+
+  buyer   User?   @relation(fields: [buyerId], references: [id])
+  buyerId String? @db.ObjectId
+
+  seller        String
+  transactionId String   @unique
+  shipped       Boolean  @default(false)
+  discount      Int
+  total         Float
+  products      String[]
+}
