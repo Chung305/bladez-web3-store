@@ -1,5 +1,6 @@
 import prisma from "../../../lib/prisma";
 
+//grabs all users with their orders
 async function getUsers(req, res) {
   const users = await prisma.user.findMany({
     include: {
@@ -11,6 +12,8 @@ async function getUsers(req, res) {
   else res.status(200).json(users);
 }
 
+//creates a new user with their PublicKey
+// requests -> publicKey
 async function createUser(req, res) {
   try {
     const newUser = await prisma.user.create({
@@ -21,14 +24,13 @@ async function createUser(req, res) {
     console.log(req.body.publicKey);
     res.status(200).json(newUser);
   } catch (err) {
-    res.status(400).send(err);
+    return res.status(400).send(err);
   }
 }
 
 export default function handler(req, res) {
   switch (req.method) {
     case "GET":
-      //add function
       getUsers(req, res);
       break;
     case "POST":

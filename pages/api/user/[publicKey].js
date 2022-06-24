@@ -1,5 +1,7 @@
 import prisma from "../../../lib/prisma";
 
+//GET 1 user
+//request -> publicKey
 async function getUser(req, res) {
   const { publicKey } = req.query;
 
@@ -7,13 +9,20 @@ async function getUser(req, res) {
     where: {
       publicKey: publicKey,
     },
+    include: {
+      orders: true,
+    },
   });
   if (!user) {
-    res.status(404).send("user not found");
+    return res.status(404).send("user not found");
   }
   res.status(200).json(user);
 }
 
+//DELETE 1 user
+// request -> publicKey
+
+//will probably never use
 async function deleteUser(req, res) {
   const { publicKey } = req.query;
   try {
@@ -28,6 +37,8 @@ async function deleteUser(req, res) {
   }
 }
 
+// update a users username
+// request -> publicKey query, username
 async function updateUser(req, res) {
   const { publicKey } = req.query;
   try {

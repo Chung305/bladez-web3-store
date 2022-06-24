@@ -1,5 +1,6 @@
 import prisma from "../../../lib/prisma";
 
+// GET all products including invetory
 async function getProducts(req, res) {
   const product = await prisma.product.findMany({
     include: {
@@ -11,6 +12,8 @@ async function getProducts(req, res) {
   else res.status(200).json(product);
 }
 
+// POST create a single product not including inventory
+// see -> /api/products/inventory for product inventory
 async function createProduct(req, res) {
   try {
     const newProduct = await prisma.product.create({
