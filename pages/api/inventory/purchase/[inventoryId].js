@@ -1,8 +1,8 @@
-import prisma from "../../../lib/prisma";
+import prisma from "../../../../lib/prisma";
 
-// PATCH increases inventory quantity
-// request -> inventory Id query, quanitty #
-async function addQuantity(req, res) {
+//PATCH decreases inventory quantity by 1 after being purchased
+// request inventory ID
+async function decrementQuantity(req, res) {
   const { inventoryId } = req.query;
 
   try {
@@ -12,23 +12,21 @@ async function addQuantity(req, res) {
       },
       data: {
         quantity: {
-          increment: req.body.quantity,
+          decrement: 1,
         },
       },
     });
     res.status(200).json(inventory);
   } catch (err) {
     console.log(err);
-    res.status(404).send("product inventory not found");
+    res.status(404).send("Product inventory not found");
   }
 }
 
 export default function handler(req, res) {
   switch (req.method) {
     case "PATCH":
-      addQuantity(req, res);
-      break;
-    case "POST":
+      decrementQuantity(req, res);
       break;
     default:
       res.status(405).send("Method not allowed");
