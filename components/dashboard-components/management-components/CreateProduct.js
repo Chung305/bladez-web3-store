@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { create } from "ipfs-http-client";
 import styles from "../../../styles/dashboard-styles/CreateProduct.module.css";
 import { Button, Form, FormGroup, Input, Label, Alert } from "reactstrap";
-import { createProduct } from "../../../lib/controller/product";
 
 const client = create("https://ipfs.infura.io:5001/api/v0");
 
@@ -47,7 +46,7 @@ const CreateProduct = () => {
 
   return (
     <div>
-      <Form className="form" onSubmit={addProduct}>
+      <Form onSubmit={addProduct} disabled={!newProductConfirm}>
         <FormGroup>
           <Label for="productName"> Product Name</Label>
           <Input
@@ -145,44 +144,42 @@ const CreateProduct = () => {
         <FormGroup check inline>
           <Input
             type="checkbox"
+            name="onlyHolder"
             onChange={(e) => {
-              if (e.target.checked) {
-                setNewProduct({ ...newProduct, onlyHolder: true });
-              } else {
-                setNewProduct({ ...newProduct, onlyHolder: false });
-              }
+              e.target.checked
+                ? setNewProduct({ ...newProduct, onlyHolder: true })
+                : setNewProduct({ ...newProduct, onlyHolder: false });
             }}
           />
-          <label check>For NFT holders only</label>
+          <Label>NFT holders only</Label>
         </FormGroup>
 
+        <FormGroup check inline>
+          <Input
+            type="checkbox"
+            name="available"
+            onChange={(e) => {
+              e.target.checked
+                ? setNewProduct({ ...newProduct, available: true })
+                : setNewProduct({ ...newProduct, available: false });
+            }}
+          />
+          <Label> Make product available</Label>
+        </FormGroup>
+
+        <FormGroup></FormGroup>
+
         <FormGroup>
+          <Input type="submit" disabled={!newProductConfirm} />
           <Input
             type="checkbox"
             onChange={(e) => {
-              if (e.target.checked) {
-                setNewProduct({ ...newProduct, available: true });
-                console.log(newProduct);
-                console.log(newProductConfirm);
-              } else {
-                setNewProduct({ ...newProduct, available: false });
-              }
+              e.target.checked
+                ? setNewProductConfirm(true)
+                : setNewProductConfirm(false);
             }}
           />
-          <label check>Make product available</label>
-        </FormGroup>
-
-        <FormGroup>
-          <input type="submit" />
-          <input
-            type="checkbox"
-            onChange={(e) => {
-              if (e.target.checked) {
-                setNewProductConfirm(true);
-              }
-            }}
-          />
-          <label check>Confirm New Product</label>
+          <Label>Confirm</Label>
         </FormGroup>
       </Form>
     </div>

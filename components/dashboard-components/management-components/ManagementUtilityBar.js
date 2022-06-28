@@ -3,16 +3,17 @@ import ViewProducts from "./ViewProducts";
 import { Button, Modal, ModalHeader, ModalFooter, ModalBody } from "reactstrap";
 import { useState } from "react";
 
-import styles from "../../../styles/dashboard-styles/ProductUtility.module.css";
+import styles from "../../../styles/dashboard-styles/ManagementUtilityBar.module.css";
 
-export default function ProductUtility() {
+export default function ManagementUtilityBar() {
   // Modal open state
   const [modal1, setModal1] = useState(false);
   const [modal2, setModal2] = useState(false);
 
-  // Toggle for Modal
+  // Toggle functions
   const addToggle = () => setModal1(!modal1);
   const viewToggle = () => setModal2(!modal2);
+
   return (
     <div>
       <div>

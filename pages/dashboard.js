@@ -7,7 +7,7 @@ import { getWalletNfts } from "../lib/meApi";
 import { addUser } from "../lib/controller/user";
 
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
-import ProductUtility from "../components/dashboard-components/management-components/ProductUtility";
+import ManagementUtilityBar from "../components/dashboard-components/management-components/ManagementUtilityBar";
 
 const Dashboard = () => {
   const { publicKey } = useWallet();
@@ -76,7 +76,7 @@ const Dashboard = () => {
         {creating && <CreateProduct />}
       </div> */}
 
-      <div>{isOwner && <ProductUtility />}</div>
+      <div>{isOwner && <ManagementUtilityBar />}</div>
 
       <SolanaMarketInfo />
 

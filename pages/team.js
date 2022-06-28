@@ -14,24 +14,24 @@ const Team = () => {
       image: "/team/bladezClub.png",
       role: "Founder",
     },
-    {
-      name: "Alex",
-      discord: "#ToeFu",
-      image: "/team/Alex.png",
-      role: "Product Designer",
-    },
-    {
-      name: "Fabain",
-      discord: "#Xmanny",
-      image: "/team/Fabain.png",
-      role: "Community Manager",
-    },
-    {
-      name: "Tyler",
-      discord: "#Redsy",
-      image: "/team/Tyler.png",
-      role: "Marketing Manager",
-    },
+    // {
+    //   name: "Alex",
+    //   discord: "#ToeFu",
+    //   image: "/team/Alex.png",
+    //   role: "Product Designer",
+    // },
+    // {
+    //   name: "Fabain",
+    //   discord: "#Xmanny",
+    //   image: "/team/Fabain.png",
+    //   role: "Community Manager",
+    // },
+    // {
+    //   name: "Tyler",
+    //   discord: "#Redsy",
+    //   image: "/team/Tyler.png",
+    //   role: "Marketing Manager",
+    // },
   ];
 
   return (

@@ -11,11 +11,32 @@ import {
   Carousel,
   CarouselItem,
   Badge,
+  Offcanvas,
+  OffcanvasHeader,
+  OffcanvasBody,
 } from "reactstrap";
 import styles from "../../../styles/dashboard-styles/ViewProduct.module.css";
+import AddInventory from "./AddInventory";
 
 const ViewProducts = () => {
   const [products, setProducts] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const [editProductModal, setEditProductModal] = useState(false);
+  const [addInventoryModal, setAddInventoryModal] = useState(false);
+
+  const editToggle = () => setEditProductModal(!editProductModal);
+  const addToggle = () => setAddInventoryModal(!addInventoryModal);
+
+  //   const next = () => {
+  //     const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
+  //     setActiveIndex(nextIndex);
+  //   };
+
+  //   const previous = () => {
+  //     const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
+  //     setActiveIndex(nextIndex);
+  //   };
 
   useEffect(() => {
     const fetchProducts = () => {
@@ -29,6 +50,8 @@ const ViewProducts = () => {
     fetchProducts();
   }, []);
 
+  console.log(products && products);
+
   return (
     <div>
       {products &&
@@ -38,7 +61,12 @@ const ViewProducts = () => {
               <CardHeader>{product.name}</CardHeader>
 
               <CardBody className={styles.cardBody}>
-                <Carousel activeIndex={0} slide={true}>
+                <Carousel
+                  activeIndex={activeIndex}
+                  //   next={next}
+                  //   previous={previous}
+                  slide={true}
+                >
                   {product.imageUrl.map((image, i) => (
                     <CarouselItem key={i}>
                       <img src={image} width={300} />
@@ -76,9 +104,35 @@ const ViewProducts = () => {
                 </div>
                 <CardText>{product.description}</CardText>
               </CardBody>
+
               <CardBody>
-                <Button>Add Inventory</Button>
-                <Button>Edit Product</Button>
+                <Button onClick={addToggle}>Add Inventory</Button>
+                <Offcanvas
+                  direction="bottom"
+                  isOpen={addInventoryModal}
+                  toggle={addToggle}
+                >
+                  <OffcanvasHeader toggle={addToggle}>
+                    Add Inventory
+                  </OffcanvasHeader>
+                  <OffcanvasBody>
+                    <AddInventory productId={product.id} />
+                  </OffcanvasBody>
+                </Offcanvas>
+
+                <Button onClick={editToggle}>Edit Product</Button>
+                <Offcanvas
+                  direction="bottom"
+                  isOpen={editProductModal}
+                  toggle={editToggle}
+                >
+                  <OffcanvasHeader toggle={editToggle}>
+                    Edit Product
+                  </OffcanvasHeader>
+                  <OffcanvasBody>
+                    <strong>Edit Product</strong>
+                  </OffcanvasBody>
+                </Offcanvas>
               </CardBody>
             </Card>
           </div>
