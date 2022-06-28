@@ -48,7 +48,7 @@ async function updateProduct(req, res) {
       },
       data: {
         name: req.body.name,
-        imageUri: req.body.imageUri,
+        imageUrl: req.body.imageUrl,
         description: req.body.description,
         category: req.body.category,
         type: req.body.type,

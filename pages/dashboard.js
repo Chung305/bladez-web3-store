@@ -4,10 +4,10 @@ import Orders from "../components/dashboard-components/Orders";
 import SolanaMarketInfo from "../components/dashboard-components/SolanaMarketInfo";
 import AccountNfts from "../components/dashboard-components/AccountNfts";
 import { getWalletNfts } from "../lib/meApi";
-import CreateProduct from "../components/CreateProduct";
-import { addUser } from "../lib/api";
+import { addUser } from "../lib/controller/user";
 
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
+import ProductUtility from "../components/dashboard-components/management-components/ProductUtility";
 
 const Dashboard = () => {
   const { publicKey } = useWallet();
@@ -67,15 +67,16 @@ const Dashboard = () => {
 
   return (
     <div className="page-container">
-      <div></div>
-      <div>
+      {/* <div>
         {isOwner && (
           <button onClick={() => setCreating(!creating)}>
             {creating ? "Close" : "Create Product"}
           </button>
         )}
         {creating && <CreateProduct />}
-      </div>
+      </div> */}
+
+      <div>{isOwner && <ProductUtility />}</div>
 
       <SolanaMarketInfo />
 

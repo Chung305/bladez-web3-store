@@ -49,8 +49,8 @@ export default function AccountNfts({ nfts }) {
                   </tr>
                 </thead>
                 <tbody className={styles.tableValue}>
-                  {nfts.attributes.map((attribute) => (
-                    <tr>
+                  {nfts.attributes.map((attribute, i) => (
+                    <tr key={i}>
                       <th scope="row">{attribute.trait_type}</th>
                       <td>{attribute.value}</td>
                     </tr>
@@ -70,8 +70,8 @@ export default function AccountNfts({ nfts }) {
               <h3>Seller Fee (Royalties)</h3>
               <p>{nfts.sellerFeeBasisPoints / 100 + "%"}</p>
 
-              {nfts.properties.creators.map((creators) => (
-                <div>
+              {nfts.properties.creators.map((creators, i) => (
+                <div key={i}>
                   <h3>Creator Address</h3>
                   <p>{creators.address}</p>
                   <p>Share: {creators.share}%</p>

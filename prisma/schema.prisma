@@ -23,7 +23,7 @@ model User {
 model Product {
   id          String       @id @default(auto()) @map("_id") @db.ObjectId
   name        String
-  imageUri    String
+  imageUrl    String[]
   description String
   category    Category?
   type        ProductType?

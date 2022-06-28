@@ -15,15 +15,19 @@ async function getProducts(req, res) {
 // POST create a single product not including inventory
 // see -> /api/products/inventory for product inventory
 async function createProduct(req, res) {
+  console.log(req.body.name);
+  console.log(req.body.imageUrl);
   try {
     const newProduct = await prisma.product.create({
       data: {
         name: req.body.name,
-        imageUri: req.body.imageUri,
+        imageUrl: req.body.imageUrl,
         description: req.body.description,
         category: req.body.category,
         type: req.body.type,
         price: req.body.price,
+        onlyHolder: req.body.onlyHolder,
+        available: req.body.available,
       },
     });
     res.status(200).json(newProduct);
