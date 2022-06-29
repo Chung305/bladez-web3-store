@@ -44,6 +44,10 @@ function App({ Component, pageProps }) {
           <HeadComponent />
           <Layout>
             <Component {...pageProps} />
+            <script
+              type="text/javascript"
+              src="https://s3.tradingview.com/tv.js"
+            ></script>
           </Layout>
         </WalletModalProvider>
       </WalletProvider>

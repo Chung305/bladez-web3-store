@@ -16,6 +16,8 @@ const CreateProduct = () => {
     onlyHolder: false,
     available: false,
   });
+
+  // state to allow form submission
   const [newProductConfirm, setNewProductConfirm] = useState(false);
 
   const [file, setFile] = useState({});

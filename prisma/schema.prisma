@@ -39,17 +39,17 @@ model Inventory {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   size      Size?
   color     String
-  quantity  Int
+  quantity  Int      @default(0)
   Product   Product? @relation(fields: [productId], references: [id])
   productId String?  @db.ObjectId
 }
 
 enum Size {
-  Xsmall
-  Small
-  Medium
-  Large
-  XLarge
+  XS
+  S
+  M
+  L
+  XL
 }
 
 enum Category {
