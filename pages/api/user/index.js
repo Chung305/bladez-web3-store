@@ -8,12 +8,11 @@ async function getUsers(req, res) {
         orders: true,
       },
     });
+    if (users.length === 0) res.status(204).send();
+    else res.status(200).json(users);
   } catch (err) {
     console.log(err);
   }
-
-  if (users.length === 0) res.status(204).send();
-  else res.status(200).json(users);
 }
 
 //creates a new user with their PublicKey
