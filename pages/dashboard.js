@@ -15,9 +15,8 @@ const Dashboard = () => {
   const [nfts, setNfts] = useState([]);
 
   const isOwner = publicKey
-    ? publicKey.toString() === process.env.MANAGEMENT
+    ? publicKey.toString() === process.env.NEXT_PUBLIC_MANAGEMENT
     : false;
-  const [creating, setCreating] = useState(false);
 
   const [activeTab, setActiveTab] = useState("1");
 
@@ -67,16 +66,9 @@ const Dashboard = () => {
 
   return (
     <div className="page-container">
-      {/* <div>
-        {isOwner && (
-          <button onClick={() => setCreating(!creating)}>
-            {creating ? "Close" : "Create Product"}
-          </button>
-        )}
-        {creating && <CreateProduct />}
-      </div> */}
-
-      <div>{isOwner && <ManagementUtilityBar />}</div>
+      <div>
+        {isOwner && <ManagementUtilityBar />} {isOwner}
+      </div>
 
       <SolanaMarketInfo />
 
