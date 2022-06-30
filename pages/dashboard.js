@@ -34,15 +34,15 @@ const Dashboard = () => {
   }, [publicKey]);
 
   // fetching wallet Nfts if wallet is connected
-  useEffect(() => {
-    const fetchNfts = async () => {
-      if (publicKey) {
-        const getNfts = await getWalletNfts(publicKey.toString());
-        setNfts(getNfts);
-      }
-    };
-    fetchNfts();
-  }, [publicKey]);
+  // useEffect(() => {
+  //   const fetchNfts = async () => {
+  //     if (publicKey) {
+  //       const getNfts = await getWalletNfts(publicKey.toString());
+  //       setNfts(getNfts);
+  //     }
+  //   };
+  //   fetchNfts();
+  // }, [publicKey]);
 
   // fetching user past orders
   // useEffect(() => {
