@@ -129,6 +129,4 @@ const Dashboard = () => {
   );
 };
 
-export async function getServerSiseProps()
-
 export default Dashboard;
