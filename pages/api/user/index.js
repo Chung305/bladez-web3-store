@@ -2,11 +2,15 @@ import prisma from "../../../lib/prisma";
 
 //grabs all users with their orders
 async function getUsers(req, res) {
-  const users = await prisma.user.findMany({
-    include: {
-      orders: true,
-    },
-  });
+  try {
+    const users = await prisma.user.findMany({
+      include: {
+        orders: true,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
 
   if (users.length === 0) res.status(204).send();
   else res.status(200).json(users);

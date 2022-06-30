@@ -15,7 +15,7 @@ const Dashboard = () => {
   const [nfts, setNfts] = useState([]);
 
   const isOwner = publicKey
-    ? publicKey.toString() === process.env.NEXT_PUBLIC_MANAGEMENT
+    ? publicKey.toString() === process.env.MANAGEMENT
     : false;
   const [creating, setCreating] = useState(false);
 
@@ -128,5 +128,7 @@ const Dashboard = () => {
     </div>
   );
 };
+
+export async function getServerSiseProps()
 
 export default Dashboard;
