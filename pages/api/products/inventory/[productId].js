@@ -1,17 +1,24 @@
 import prisma from "../../../../lib/prisma";
 
 // POST creates an inventory of a product using [productId] query
-// request -> size, color, quantity, productId
+// request -> size, color, quantity
 async function createInventory(req, res) {
   const { productId } = req.query;
 
   try {
-    const inventory = await prisma.inventory.create({
+    const inventory = await prisma.product.update({
+      where: {
+        id: productId,
+      },
+
       data: {
-        size: req.body.size,
-        color: req.body.color,
-        quantity: req.body.quantity,
-        productId: productId,
+        inventory: {
+          create: {
+            size: req.body.size,
+            color: req.body.color,
+            quantity: req.body.quantity,
+          },
+        },
       },
     });
     res.status(200).json(inventory);

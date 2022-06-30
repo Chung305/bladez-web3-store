@@ -8,7 +8,7 @@ import {
   CardText,
   Table,
   Button,
-  Carousel,
+  UncontrolledCarousel,
   CarouselItem,
   Badge,
   Offcanvas,
@@ -61,18 +61,11 @@ const ViewProducts = () => {
               <CardHeader>{product.name}</CardHeader>
 
               <CardBody className={styles.cardBody}>
-                <Carousel
-                  activeIndex={activeIndex}
-                  //   next={next}
-                  //   previous={previous}
-                  slide={true}
-                >
-                  {product.imageUrl.map((image, i) => (
-                    <CarouselItem key={i}>
-                      <img src={image} width={300} />
-                    </CarouselItem>
-                  ))}
-                </Carousel>
+                <UncontrolledCarousel
+                  items={product.imageUrl.map((image, i) => {
+                    return { key: i, caption: "", src: image };
+                  })}
+                />
 
                 <div>
                   <Table hover>

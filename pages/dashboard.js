@@ -7,7 +7,6 @@ import { getWalletNfts } from "../lib/meApi";
 import { addUser } from "../lib/controller/user";
 
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
-import ManagementUtilityBar from "../components/dashboard-components/management-components/ManagementUtilityBar";
 
 const Dashboard = () => {
   const { publicKey } = useWallet();
@@ -66,10 +65,6 @@ const Dashboard = () => {
 
   return (
     <div className="page-container">
-      <div>
-        {isOwner && <ManagementUtilityBar />} {isOwner}
-      </div>
-
       <SolanaMarketInfo />
 
       <Nav tabs>
@@ -97,6 +92,13 @@ const Dashboard = () => {
             Past Orders
           </NavLink>
         </NavItem>
+        {isOwner && (
+          <NavItem>
+            <NavLink className={activeTab == "4" ? "active" : ""} href="/admin">
+              Admin
+            </NavLink>
+          </NavItem>
+        )}
       </Nav>
       <TabContent activeTab={activeTab}>
         <TabPane tabId="1">tab index wallet info</TabPane>
