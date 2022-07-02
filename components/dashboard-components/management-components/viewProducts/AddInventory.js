@@ -12,7 +12,8 @@ const AddInventory = (productId) => {
   const [confirmInventory, setConfirmInventory] = useState(false);
 
   //creates new inventory to product
-  const addInventory = async (productId) => {
+  const addInventory = async () => {
+    console.log(inventory);
     try {
       const response = await fetch("../api/products/inventory/" + productId, {
         method: "POST",
@@ -34,15 +35,13 @@ const AddInventory = (productId) => {
   return (
     <div>
       <h1>{productId.productId}</h1>
-      <Form
-        // onSubmit={addInventory(productId.productId)}
-        disabled={!confirmInventory}
-      >
+      <Form onSubmit={addInventory} disabled={!confirmInventory}>
         <FormGroup>
           <Row>
             <Col>
               <Label>Size</Label>
               <Input
+                id="size"
                 name="size"
                 type="select"
                 onChange={(e) => {
@@ -61,6 +60,7 @@ const AddInventory = (productId) => {
             <Col>
               <Label>Color</Label>
               <Input
+                id="color"
                 name="color"
                 onChange={(e) => {
                   setInventory({
@@ -74,6 +74,7 @@ const AddInventory = (productId) => {
             <Col>
               <Label>Quantity</Label>
               <Input
+                id="quantity"
                 name="quantity"
                 type="integer"
                 onChange={(e) => {
@@ -87,7 +88,7 @@ const AddInventory = (productId) => {
           </Row>
         </FormGroup>
         <FormGroup>
-          <Input type="submit" disabled={!confirmInventory} />
+          <Input type="Submit" disabled={!confirmInventory} />
           <Input
             type="checkbox"
             onChange={(e) => {

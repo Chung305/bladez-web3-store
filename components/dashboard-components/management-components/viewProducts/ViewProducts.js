@@ -11,11 +11,15 @@ import {
   UncontrolledCarousel,
   CarouselItem,
   Badge,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
   Offcanvas,
   OffcanvasHeader,
   OffcanvasBody,
 } from "reactstrap";
-import styles from "../../../styles/dashboard-styles/ViewProduct.module.css";
+import styles from "../../../../styles/dashboard-styles/ViewProduct.module.css";
 import AddInventory from "./AddInventory";
 
 const ViewProducts = () => {
@@ -100,6 +104,18 @@ const ViewProducts = () => {
 
               <CardBody>
                 <Button onClick={addToggle}>Add Inventory</Button>
+                {/* <Modal isOpen={addInventoryModal} toggle={addToggle}>
+                  <ModalHeader toggle={addToggle}>Modal title</ModalHeader>
+                  <ModalBody>
+                    <AddInventory productId={product.id} />
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="primary" onClick={function noRefCheck() {}}>
+                      Do Something
+                    </Button>{" "}
+                    <Button onClick={function noRefCheck() {}}>Cancel</Button>
+                  </ModalFooter>
+                </Modal> */}
                 <Offcanvas
                   direction="bottom"
                   isOpen={addInventoryModal}
