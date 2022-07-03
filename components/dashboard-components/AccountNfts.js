@@ -23,9 +23,9 @@ export default function AccountNfts({ nfts }) {
 
   return (
     <div className={styles.container}>
-      <img className={styles.image} src={nfts.image} />
+      <img className={styles.image} src={nfts.data.image} />
 
-      <p>{nfts.name}</p>
+      <p>{nfts.data.name}</p>
       <div>
         <Button className={styles.button} color="primary" onClick={toggle}>
           Check Metadata
@@ -49,7 +49,7 @@ export default function AccountNfts({ nfts }) {
                   </tr>
                 </thead>
                 <tbody className={styles.tableValue}>
-                  {nfts.attributes.map((attribute, i) => (
+                  {nfts.data.attributes.map((attribute, i) => (
                     <tr key={i}>
                       <th scope="row">{attribute.trait_type}</th>
                       <td>{attribute.value}</td>
@@ -59,18 +59,18 @@ export default function AccountNfts({ nfts }) {
               </Table>
 
               <h3>Mint Authority Address</h3>
-              <p>{nfts.mintAddress}</p>
+              <p>{nfts.mintAuthority}</p>
 
               <h3>Update Authority Address</h3>
               <p>{nfts.updateAuthority}</p>
 
-              <h3>IPFS URI</h3>
-              <p className={styles.break}>{nfts.image}</p>
+              <h3>IMAGE URL</h3>
+              <p className={styles.break}>{nfts.data.image}</p>
 
               <h3>Seller Fee (Royalties)</h3>
-              <p>{nfts.sellerFeeBasisPoints / 100 + "%"}</p>
+              <p>{nfts.data.seller_fee_basis_points / 100 + "%"}</p>
 
-              {nfts.properties.creators.map((creators, i) => (
+              {nfts.data.properties.creators.map((creators, i) => (
                 <div key={i}>
                   <h3>Creator Address</h3>
                   <p>{creators.address}</p>

@@ -3,8 +3,9 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import Orders from "../components/dashboard-components/Orders";
 import SolanaMarketInfo from "../components/dashboard-components/SolanaMarketInfo";
 import AccountNfts from "../components/dashboard-components/AccountNfts";
-import { getWalletNfts } from "../lib/meApi";
+
 import { addUser } from "../lib/controller/user";
+import { getWalletNft } from "../lib/web3Util";
 
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 
@@ -33,35 +34,17 @@ const Dashboard = () => {
 
   // fetching wallet Nfts if wallet is connected
   useEffect(() => {
-    const fetchNfts = async () => {
+    try {
       if (publicKey) {
-        const getNfts = await getWalletNfts(publicKey.toString());
-        setNfts(getNfts);
+        const fetchNfts = getWalletNft(publicKey.toString());
+        fetchNfts.then((data) => {
+          setNfts(data);
+        });
       }
-    };
-    fetchNfts();
+    } catch (err) {
+      console.log(err);
+    }
   }, [publicKey]);
-
-  // fetching user past orders
-  // useEffect(() => {
-  //   try {
-  //     if (publicKey) {
-  //       try {
-  //         fetch(`../api/orders?buyer=${publicKey.toString()}`)
-  //           .then((response) => response.json())
-  //           .then((data) => {
-  //             setUserOrders(data);
-  //           });
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     }
-  //   } catch (err) {
-  //     // 👇️ SyntaxError: Unexpected end of JSON input
-  //     console.log("error something happened");
-  //     console.log("error", err);
-  //   }
-  // }, [publicKey]);
 
   return (
     <div className="page-container">
@@ -106,7 +89,7 @@ const Dashboard = () => {
           <div>
             <div className="nft-container">
               {publicKey ? (
-                nfts.map((nft) => <AccountNfts key={nft.name} nfts={nft} />)
+                nfts.map((nft, i) => <AccountNfts key={i} nfts={nft} />)
               ) : (
                 <p>Connect Wallet</p>
               )}
