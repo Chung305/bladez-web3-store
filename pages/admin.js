@@ -10,6 +10,7 @@ import {
 import ViewProducts from "../components/dashboard-components/management-components/viewProducts/ViewProducts";
 import CreateProduct from "../components/dashboard-components/management-components/CreateProduct";
 import { useState } from "react";
+import ViewUsers from "../components/dashboard-components/management-components/viewUsers/ViewUsers";
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState("1");
@@ -37,11 +38,11 @@ const Admin = () => {
       </Nav>
       <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
-          <Row>
-            <Col sm="12">
-              <ViewProducts />
-            </Col>
-          </Row>
+          <ViewProducts />
+        </TabPane>
+
+        <TabPane tabId="2">
+          <ViewUsers />
         </TabPane>
       </TabContent>
     </div>
