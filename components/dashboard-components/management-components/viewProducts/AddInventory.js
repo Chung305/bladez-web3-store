@@ -34,7 +34,8 @@ const AddInventory = (productId) => {
 
   return (
     <div>
-      <h1>{productId.productId}</h1>
+      <h2>Add Inventory</h2>
+      <h3>ID: {productId.productId}</h3>
       <Form onSubmit={addInventory} disabled={!confirmInventory}>
         <FormGroup>
           <Row>

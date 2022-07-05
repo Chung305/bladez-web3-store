@@ -30,8 +30,8 @@ const ViewUsers = () => {
         </thead>
         <tbody>
           {users &&
-            users.map((user) => (
-              <tr>
+            users.map((user, i) => (
+              <tr key={i}>
                 <td>{user.publicKey}</td>
                 <td>{user.username}</td>
                 <td>

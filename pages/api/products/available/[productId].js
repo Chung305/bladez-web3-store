@@ -3,6 +3,11 @@
 export default async function handler(req, res) {
   const { productId } = req.query;
 
+  var bool;
+
+  if (req.body === "true") bool = true;
+  else bool = false;
+
   if (req.method === "PATCH") {
     try {
       const updateAvailable = await prisma.product.update({
@@ -10,7 +15,7 @@ export default async function handler(req, res) {
           id: productId,
         },
         data: {
-          available: !req.body.available,
+          available: bool,
         },
       });
       res.status(200).json(updateAvailable);

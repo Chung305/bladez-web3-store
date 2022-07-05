@@ -2,6 +2,10 @@
 // request -> current products onlyHolder status
 export default async function handler(req, res) {
   const { productId } = req.query;
+  var bool;
+
+  if (req.body === "true") bool = true;
+  else bool = false;
 
   if (req.method === "PATCH") {
     try {
@@ -10,7 +14,7 @@ export default async function handler(req, res) {
           id: productId,
         },
         data: {
-          onlyHolder: !req.body.onlyHolder,
+          onlyHolder: bool,
         },
       });
       res.status(200).json(updateAvailable);

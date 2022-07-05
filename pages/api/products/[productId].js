@@ -40,7 +40,7 @@ async function deleteProduct(req, res) {
 // request -> name, imageUri, description, category, type, price
 async function updateProduct(req, res) {
   const { productId } = req.query;
-
+  console.log("attemptiong to update");
   try {
     const updatedProduct = await prisma.product.update({
       where: {
@@ -48,7 +48,6 @@ async function updateProduct(req, res) {
       },
       data: {
         name: req.body.name,
-        imageUrl: req.body.imageUrl,
         description: req.body.description,
         category: req.body.category,
         type: req.body.type,

@@ -1,11 +1,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
-  Card,
-  CardHeader,
-  CardImg,
-  CardBody,
-  CardText,
   Table,
   Button,
   UncontrolledCarousel,
@@ -14,6 +9,7 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
+  Spinner,
   ModalFooter,
   Offcanvas,
   OffcanvasHeader,
@@ -21,29 +17,28 @@ import {
 } from "reactstrap";
 import styles from "../../../../styles/dashboard-styles/ViewProduct.module.css";
 import AddInventory from "./AddInventory";
+import EditProduct from "./EditProduct";
+import {
+  updateIsHolder,
+  updateAvailable,
+} from "../../../../lib/controller/product";
 
 const ViewProducts = () => {
+  //used to refresh page on onlyHolder/available when updated
+  const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState(null);
-  const [activeIndex, setActiveIndex] = useState(0);
 
-  const [editProductModal, setEditProductModal] = useState(false);
-  const [addInventoryModal, setAddInventoryModal] = useState(false);
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
 
-  const editToggle = () => setEditProductModal(!editProductModal);
-  const addToggle = () => setAddInventoryModal(!addInventoryModal);
+  const [inventoryEdit, setInvetoryEdit] = useState(true);
+  const toggleEdit = () => setInvetoryEdit(!inventoryEdit);
 
-  //   const next = () => {
-  //     const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
-  //     setActiveIndex(nextIndex);
-  //   };
-
-  //   const previous = () => {
-  //     const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
-  //     setActiveIndex(nextIndex);
-  //   };
+  const [refresh, setRefresh] = useState(true);
 
   useEffect(() => {
-    const fetchProducts = () => {
+    console.log("render");
+    const fetchProducts = async () => {
       fetch("../api/products")
         .then((response) => response.json())
         .then((data) => {
@@ -51,101 +46,134 @@ const ViewProducts = () => {
           setProducts(data);
         });
     };
-    fetchProducts();
-  }, []);
+    setTimeout(() => {
+      fetchProducts();
+    }, 500);
+    setLoading(false);
+  }, [refresh]);
 
-  console.log(products && products);
-
+  // const refresh = () => {
+  //   const change = !refresher;
+  //   setRefresher(change);
+  //   window.location.reload(false);
+  // };
   return (
     <div>
-      {products &&
-        products.map((product, i) => (
-          <div key={i}>
-            <Card>
-              <CardHeader>{product.name}</CardHeader>
+      <div>
+        <Table className={styles.table}>
+          <tbody>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>NFT Holder</th>
+              <th>Available</th>
+              <th>Category</th>
+              <th>Type</th>
+            </tr>
+            {products &&
+              products.map((product, i) => (
+                <tr key={i}>
+                  <td className={styles.tableColumnButton}>
+                    <img
+                      src={product.imageUrl[0]}
+                      className={styles.productImage}
+                    />
+                    <Button className={styles.button}>Add/Edit</Button>
+                  </td>
 
-              <CardBody className={styles.cardBody}>
-                <UncontrolledCarousel
-                  items={product.imageUrl.map((image, i) => {
-                    return { key: i, caption: "", src: image };
-                  })}
-                />
+                  <td>{product.name}</td>
 
-                <div>
-                  <Table hover>
-                    <tbody>
-                      <tr>
-                        <th scope="row">Price:</th>
-                        <td>{product.price} USDC</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">NFT Holders:</th>
-                        <td>
-                          {product.onlyHolder.toString()}
-                          <Button>Change</Button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Available:</th>
-                        <td>
-                          {product.available.toString()}
-                          <Button>Change</Button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                  <div>
+                  <td>{product.price} USDC</td>
+
+                  <td>
+                    {loading ? (
+                      <Spinner color="info" type="grow">
+                        loading...
+                      </Spinner>
+                    ) : (
+                      <Button
+                        className={
+                          product.onlyHolder && product.onlyHolder
+                            ? styles.buttonTrue
+                            : styles.buttonFalse
+                        }
+                        onClick={() => {
+                          console.log(!product.onlyHolder);
+                          updateIsHolder(
+                            product.id.toString(),
+                            !product.onlyHolder
+                          );
+                          setRefresh(!refresh);
+                        }}
+                      >
+                        {product.onlyHolder.toString() &&
+                          product.onlyHolder.toString()}
+                      </Button>
+                    )}
+                  </td>
+
+                  <td>
+                    {loading ? (
+                      <Spinner color="info" type="grow">
+                        loading...
+                      </Spinner>
+                    ) : (
+                      <Button
+                        className={
+                          product.available && product.available
+                            ? styles.buttonTrue
+                            : styles.buttonFalse
+                        }
+                        onClick={() => {
+                          console.log(!product.available);
+                          updateAvailable(
+                            product.id.toString(),
+                            !product.available
+                          );
+                          setRefresh(!refresh);
+                        }}
+                      >
+                        {product.available.toString() &&
+                          product.available.toString()}
+                      </Button>
+                    )}
+                  </td>
+                  <td>
                     <Badge color="dark">{product.category}</Badge>
+                  </td>
+                  <td>
                     <Badge color="dark">{product.type}</Badge>
-                  </div>
-                </div>
-                <CardText>{product.description}</CardText>
-              </CardBody>
-
-              <CardBody>
-                <Button onClick={addToggle}>Add Inventory</Button>
-                {/* <Modal isOpen={addInventoryModal} toggle={addToggle}>
-                  <ModalHeader toggle={addToggle}>Modal title</ModalHeader>
-                  <ModalBody>
-                    <AddInventory productId={product.id} />
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button color="primary" onClick={function noRefCheck() {}}>
-                      Do Something
-                    </Button>{" "}
-                    <Button onClick={function noRefCheck() {}}>Cancel</Button>
-                  </ModalFooter>
-                </Modal> */}
-                <Offcanvas
-                  direction="bottom"
-                  isOpen={addInventoryModal}
-                  toggle={addToggle}
-                >
-                  <OffcanvasHeader toggle={addToggle}>
-                    Add Inventory
-                  </OffcanvasHeader>
-                  <OffcanvasBody>
-                    <AddInventory productId={product.id} />
-                  </OffcanvasBody>
-                </Offcanvas>
-
-                <Button onClick={editToggle}>Edit Product</Button>
-                <Offcanvas
-                  direction="bottom"
-                  isOpen={editProductModal}
-                  toggle={editToggle}
-                >
-                  <OffcanvasHeader toggle={editToggle}>
-                    Edit Product
-                  </OffcanvasHeader>
-                  <OffcanvasBody>
-                    <strong>Edit Product</strong>
-                  </OffcanvasBody>
-                </Offcanvas>
-              </CardBody>
-            </Card>
-          </div>
-        ))}
+                  </td>
+                  <td>
+                    <Button className={styles.button} onClick={toggle}>
+                      Edit
+                    </Button>
+                    <Modal
+                      isOpen={modal}
+                      toggle={toggle}
+                      size="xl"
+                      modalTransition={{ timeout: 200 }}
+                    >
+                      <ModalBody>
+                        {inventoryEdit ? (
+                          <AddInventory productId={product.id} />
+                        ) : (
+                          <EditProduct product={product} />
+                        )}
+                        <div>
+                          <Button onClick={toggleEdit}>
+                            {inventoryEdit ? "Edit Product" : "Inventory"}
+                          </Button>
+                        </div>
+                      </ModalBody>
+                    </Modal>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </Table>
+      </div>
     </div>
   );
 };

@@ -1,3 +1,47 @@
+.card {
+    text-align: center;
+}
 .cardBody {
     display: flex;
+    justify-content: space-around;
+    
+}
+.productImage img {
+    min-width: 250px;
+    max-width: 300px;
+}
+.productImage {
+    width: 80px;
+}
+
+.table {
+    vertical-align: middle;
+}
+
+.table th {
+    font-size: 12px;
+    margin: auto;
+    align-items: center;
+    color: #deabfe;
+}
+.table td {
+    font-size: 11px;
+    align-items: center;
+    color: white;
+}
+.button {
+    font-size: 11px;
+}
+
+.buttonFalse {
+    font-size: 11px;
+    background-color: red;
+}
+.buttonTrue {
+    font-size: 11px;
+    background-color: green;
+}
+.tableColumnButton {
+    display: flex;
+    flex-direction: column;
 }
