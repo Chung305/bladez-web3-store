@@ -45,3 +45,18 @@
     display: flex;
     flex-direction: column;
 }
+
+.addEditContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+.addEditContainer span {
+    font-size: 11px;
+}
+
+.addEditContainer Button {
+    width: 30%;
+    margin: auto;
+}

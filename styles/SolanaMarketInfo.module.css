@@ -1,9 +1,24 @@
 .container {
     display: flex;
-    flex-direction: column;
     background-color: black;
     margin-bottom: 20px;
+    font-size: 11px;
+    flex-wrap: wrap;
 }
+.card {
+    margin: 0 10px;
+}
+.label {
+    color: #fcf27a;
+}
+.solanaData{
+    color: white;
+}
+.name {
+    width: 65px;
+}
+
+
 .subContainer {
     display: flex;
     justify-content: center;
@@ -23,9 +38,9 @@
 }
 
 
-@media only screen and (max-width: 768px) {
+/* @media only screen and (max-width: 768px) {
     .container{
         display: none;
     }
     
-}
+} */

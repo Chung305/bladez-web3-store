@@ -22,6 +22,7 @@ import {
   updateIsHolder,
   updateAvailable,
 } from "../../../../lib/controller/product";
+import EditImages from "./EditImages";
 
 const ViewProducts = () => {
   //used to refresh page on onlyHolder/available when updated
@@ -33,6 +34,9 @@ const ViewProducts = () => {
 
   const [inventoryEdit, setInvetoryEdit] = useState(true);
   const toggleEdit = () => setInvetoryEdit(!inventoryEdit);
+
+  const [addEditImage, setAddEditImage] = useState(false);
+  const toggleImage = () => setAddEditImage(!addEditImage);
 
   const [refresh, setRefresh] = useState(true);
 
@@ -50,7 +54,7 @@ const ViewProducts = () => {
       fetchProducts();
     }, 500);
     setLoading(false);
-  }, [refresh]);
+  }, [refresh, !modal]);
 
   // const refresh = () => {
   //   const change = !refresher;
@@ -79,7 +83,21 @@ const ViewProducts = () => {
                       src={product.imageUrl[0]}
                       className={styles.productImage}
                     />
-                    <Button className={styles.button}>Add/Edit</Button>
+                    <Button className={styles.button} onClick={toggleImage}>
+                      Add/Edit
+                    </Button>
+                    <Offcanvas
+                      isOpen={addEditImage}
+                      toggle={toggleImage}
+                      direction="end"
+                    >
+                      <OffcanvasHeader toggle={toggleImage}>
+                        Add/Remove Image
+                      </OffcanvasHeader>
+                      <OffcanvasBody>
+                        <EditImages images={product.imageUrl} />
+                      </OffcanvasBody>
+                    </Offcanvas>
                   </td>
 
                   <td>{product.name}</td>
@@ -149,6 +167,7 @@ const ViewProducts = () => {
                     <Button className={styles.button} onClick={toggle}>
                       Edit
                     </Button>
+
                     <Modal
                       isOpen={modal}
                       toggle={toggle}
@@ -161,10 +180,11 @@ const ViewProducts = () => {
                         ) : (
                           <EditProduct product={product} />
                         )}
-                        <div>
+                        <div className={styles.addEditContainer}>
                           <Button onClick={toggleEdit}>
                             {inventoryEdit ? "Edit Product" : "Inventory"}
                           </Button>
+                          <span>Switch</span>
                         </div>
                       </ModalBody>
                     </Modal>

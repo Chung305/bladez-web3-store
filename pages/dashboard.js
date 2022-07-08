@@ -56,7 +56,7 @@ const Dashboard = () => {
             className={activeTab == "1" ? "active" : ""}
             onClick={() => setActiveTab("1")}
           >
-            Wallet
+            CBC
           </NavLink>
         </NavItem>
         <NavItem>
@@ -84,7 +84,7 @@ const Dashboard = () => {
         )}
       </Nav>
       <TabContent activeTab={activeTab}>
-        <TabPane tabId="1">tab index wallet info</TabPane>
+        <TabPane tabId="1">Coming Soon...</TabPane>
         <TabPane tabId="2">
           <div>
             <div className="nft-container">

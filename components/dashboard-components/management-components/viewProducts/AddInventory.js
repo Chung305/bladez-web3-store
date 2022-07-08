@@ -12,16 +12,20 @@ const AddInventory = (productId) => {
   const [confirmInventory, setConfirmInventory] = useState(false);
 
   //creates new inventory to product
-  const addInventory = async () => {
+  const addInventory = async (event) => {
+    event.preventDefault();
     console.log(inventory);
     try {
-      const response = await fetch("../api/products/inventory/" + productId, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(inventory),
-      });
+      const response = await fetch(
+        "../api/products/inventory/" + productId.productId,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(inventory),
+        }
+      );
       if (response.status === 201) {
         alert("Inventory created!");
       } else {
@@ -89,16 +93,18 @@ const AddInventory = (productId) => {
           </Row>
         </FormGroup>
         <FormGroup>
-          <Input type="Submit" disabled={!confirmInventory} />
-          <Input
-            type="checkbox"
-            onChange={(e) => {
-              e.target.checked
-                ? setConfirmInventory(true)
-                : setConfirmInventory(false);
-            }}
-          />
-          <Label>Confirm</Label>
+          <Col sm={3}>
+            <Input type="Submit" disabled={!confirmInventory} />
+            <Input
+              type="checkbox"
+              onChange={(e) => {
+                e.target.checked
+                  ? setConfirmInventory(true)
+                  : setConfirmInventory(false);
+              }}
+            />
+            <Label>Confirm</Label>
+          </Col>
         </FormGroup>
       </Form>
     </div>

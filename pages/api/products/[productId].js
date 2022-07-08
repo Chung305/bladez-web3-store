@@ -37,14 +37,15 @@ async function deleteProduct(req, res) {
 }
 
 //PATCH update a products
-// request -> name, imageUri, description, category, type, price
+// request -> name,, description, category, type, price
 async function updateProduct(req, res) {
   const { productId } = req.query;
-  console.log("attemptiong to update");
+
   try {
+    console.log(req.body);
     const updatedProduct = await prisma.product.update({
       where: {
-        id: productId,
+        id: productId.toString(),
       },
       data: {
         name: req.body.name,
@@ -54,9 +55,11 @@ async function updateProduct(req, res) {
         price: req.body.price,
       },
     });
-    res.status(200).json(updatedProduct);
+    console.log(updatedProduct);
+    return res.status(200).json(updatedProduct);
   } catch (err) {
-    res.status(404).send("product not found");
+    console.log(err);
+    return res.status(404).send("product not found");
   }
 }
 

@@ -11,6 +11,7 @@ import {
 } from "reactstrap";
 import { updateProduct } from "../../../../lib/controller/product";
 import styles from "../../../../styles/dashboard-styles/EditProduct.module.css";
+const querystring = require("querystring");
 
 const EditProduct = (product) => {
   const {
@@ -33,6 +34,9 @@ const EditProduct = (product) => {
     type: "",
   });
 
+  // state to allow form submission
+  const [confirmInventory, setConfirmInventory] = useState(false);
+
   useEffect(() => {
     console.log(product);
     setProductUpdate({
@@ -45,26 +49,28 @@ const EditProduct = (product) => {
     console.log(productUpdate);
   }, []);
 
-  const formSubmit = async () => {
+  const formSubmit = async (event) => {
+    event.preventDefault();
     console.log("function executed");
-    try {
-      const response = await fetch(`../api/products/` + id, {
-        method: "PATCH",
-        header: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(productUpdate),
+    console.log(id);
+    const productId = id.toString();
+    console.log(productId);
+
+    await fetch(`../api/products/${productId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productUpdate),
+    })
+      .then((data) => {
+        if (data.status === 200) {
+          alert("product updated!");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      const data = await response.json();
-      console.log("passed response");
-      if (response.status === 201) {
-        alert("Product updated!");
-      } else {
-        alert("Unable to update product: ", data.error);
-      }
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   return (
@@ -166,14 +172,18 @@ const EditProduct = (product) => {
           </Col>
         </FormGroup>
 
-        <FormGroup check row>
-          <Col
-            sm={{
-              offset: 2,
-              size: 10,
-            }}
-          >
-            <Button type="submit">Submit</Button>
+        <FormGroup>
+          <Col sm={3}>
+            <Input type="submit" disabled={!confirmInventory} />
+            <Input
+              type="checkbox"
+              onChange={(e) => {
+                e.target.checked
+                  ? setConfirmInventory(true)
+                  : setConfirmInventory(false);
+              }}
+            />
+            <Label>Confirm</Label>
           </Col>
         </FormGroup>
       </Form>
