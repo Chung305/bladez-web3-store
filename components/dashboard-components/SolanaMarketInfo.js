@@ -22,6 +22,11 @@ export default function SolanaMarketInfo() {
         });
     };
     fetchData();
+    const interval = setInterval(() => {
+      fetchData();
+    }, 30000);
+
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -30,7 +35,7 @@ export default function SolanaMarketInfo() {
       setSolanaTPS(tps);
     };
     fetchTps();
-  }, []);
+  }, [SolanaMarketInfo]);
 
   return (
     <div className={styles.container}>
@@ -43,7 +48,7 @@ export default function SolanaMarketInfo() {
           ${solanaMarketInfo && solanaMarketInfo.solana.usd}
         </span>
       </div>
-      <div className={styles.card}>
+      <div className={styles.mobileView}>
         <span className={styles.label}>M.Cap:</span>
         <span className={styles.solanaData}>
           {" "}
@@ -57,7 +62,7 @@ export default function SolanaMarketInfo() {
           )}
         </span>
       </div>
-      <div className={styles.card}>
+      <div className={styles.mobileView}>
         <span className={styles.label}>24h V: </span>
         <span className={styles.solanaData}>
           $
@@ -89,64 +94,6 @@ export default function SolanaMarketInfo() {
           {solanaTPS && solanaTPS.toFixed(0)} TPS
         </span>
       </div>
-      {/* <p className={styles.marketTitle}>Solana</p>
-
-      <div className={styles.subContainer}>
-        <Table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Price</th>
-              <th>Market Cap</th>
-              <th>24h Volume</th>
-              <th>24h Change</th>
-              <th>TPS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td scope="row">
-                ${solanaMarketInfo && solanaMarketInfo.solana.usd}
-              </td>
-              <td>
-                $
-                {numberWithCommas(
-                  (
-                    Math.round(
-                      solanaMarketInfo &&
-                        solanaMarketInfo.solana.usd_market_cap * 100
-                    ) / 100
-                  ).toFixed(2)
-                )}
-              </td>
-              <td>
-                {" "}
-                $
-                {numberWithCommas(
-                  (
-                    Math.round(
-                      solanaMarketInfo &&
-                        solanaMarketInfo.solana.usd_24h_vol * 100
-                    ) / 100
-                  ).toFixed(2)
-                )}
-              </td>
-              <td>
-                {" "}
-                {numberWithCommas(
-                  (
-                    Math.round(
-                      solanaMarketInfo &&
-                        solanaMarketInfo.solana.usd_24h_change * 100
-                    ) / 100
-                  ).toFixed(2)
-                )}
-                %
-              </td>
-              <td>{solanaTPS && solanaTPS.toFixed(0)}</td>
-            </tr>
-          </tbody>
-        </Table>
-      </div> */}
     </div>
   );
 }

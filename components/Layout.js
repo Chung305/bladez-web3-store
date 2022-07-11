@@ -6,6 +6,7 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import logo from "../public/whiteLogo.png";
 import styles from "../styles/Layout.module.css";
+import SolanaMarketInfo from "../components/dashboard-components/SolanaMarketInfo";
 // import { checkUser, addUser } from "../lib/api";
 
 export default function Layout({ children }) {
@@ -117,6 +118,7 @@ export default function Layout({ children }) {
           </button>
         </nav>
       </header>
+      <SolanaMarketInfo />
 
       {/* Main page container */}
       <main className={styles.mainContainer}>{children}</main>

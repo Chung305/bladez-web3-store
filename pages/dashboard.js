@@ -3,6 +3,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import Orders from "../components/dashboard-components/Orders";
 import SolanaMarketInfo from "../components/dashboard-components/SolanaMarketInfo";
 import AccountNfts from "../components/dashboard-components/AccountNfts";
+import styles from "../styles/Dashboard.module.css";
 
 import { addUser } from "../lib/controller/user";
 import { getWalletNft } from "../lib/web3Util";
@@ -48,10 +49,10 @@ const Dashboard = () => {
 
   return (
     <div className="page-container">
-      <SolanaMarketInfo />
+      {/* <SolanaMarketInfo /> */}
 
       <Nav tabs>
-        <NavItem>
+        <NavItem className={styles.tabLinks}>
           <NavLink
             className={activeTab == "1" ? "active" : ""}
             onClick={() => setActiveTab("1")}
@@ -59,7 +60,7 @@ const Dashboard = () => {
             CBC
           </NavLink>
         </NavItem>
-        <NavItem>
+        <NavItem className={styles.tabLinks}>
           <NavLink
             className={activeTab == "2" ? "active" : ""}
             onClick={() => setActiveTab("2")}
@@ -67,7 +68,7 @@ const Dashboard = () => {
             NFTs
           </NavLink>
         </NavItem>
-        <NavItem>
+        <NavItem className={styles.tabLinks}>
           <NavLink
             className={activeTab == "3" ? "active" : ""}
             onClick={() => setActiveTab("3")}
@@ -76,7 +77,7 @@ const Dashboard = () => {
           </NavLink>
         </NavItem>
         {isOwner && (
-          <NavItem>
+          <NavItem className={styles.adminLink}>
             <NavLink className={activeTab == "4" ? "active" : ""} href="/admin">
               Admin
             </NavLink>

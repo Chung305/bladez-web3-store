@@ -4,6 +4,7 @@
     padding: 20px;
     border-radius: 10px;
     border: 2px solid #deabfe;
+   
 }
 .container p {
     font-size: 14px;
@@ -12,17 +13,36 @@
     height: 200px;
     width: 200px;
 }
+.nftNameContainer {
+    margin-top: 15px;
+}
+.nftName {
+    padding-top: 15px;
+    color: white;
+    font-size: 11px;
+}
 .modalContainer {
     text-align: center;
     background-color: black;
     border: 2px solid #fcf27a;
     border-radius: 10px;
 }
+.modalContainer h3 {
+    font-size: medium;
+}
 .button {
+    margin-top: 10px;
     font-size: 14px;
     color: #deabfe;
     border: 2px solid #fcf27a;
-    background-color: black;
+    background-color: white;
+    /* display: inline-block;
+    position:absolute;
+bottom:10px;
+right:10px; */
+}
+.buttonImg {
+    height: 20px;
 }
 .table {
     width: 80%;
@@ -34,8 +54,19 @@
 }
 .tableValue {
     color: white;
+    font-size: 12px;
     
+}
+.data{
+    font-size: 12px;
 }
 .break {
     word-break: break-all;
+}
+
+@media only screen and (max-width: 768px) {
+    .image {
+        height: 170px;
+        width: 170px;
+    }
 }

@@ -3,14 +3,13 @@ import { useEffect, useState } from "react";
 import {
   Table,
   Button,
-  UncontrolledCarousel,
-  CarouselItem,
+  UncontrolledPopover,
+  PopoverBody,
+  PopoverHeader,
   Badge,
   Modal,
-  ModalHeader,
   ModalBody,
   Spinner,
-  ModalFooter,
   Offcanvas,
   OffcanvasHeader,
   OffcanvasBody,
@@ -46,7 +45,7 @@ const ViewProducts = () => {
       fetch("../api/products")
         .then((response) => response.json())
         .then((data) => {
-          // console.log(data);
+          console.log(data);
           setProducts(data);
         });
     };
@@ -100,7 +99,7 @@ const ViewProducts = () => {
                     </Offcanvas>
                   </td>
 
-                  <td>{product.name}</td>
+                  <td>{product.name} </td>
 
                   <td>{product.price} USDC</td>
 
@@ -181,13 +180,47 @@ const ViewProducts = () => {
                           <EditProduct product={product} />
                         )}
                         <div className={styles.addEditContainer}>
-                          <Button onClick={toggleEdit}>
+                          <Button onClick={toggleEdit}>Switch</Button>
+                          <span>
                             {inventoryEdit ? "Edit Product" : "Inventory"}
-                          </Button>
-                          <span>Switch</span>
+                          </span>
                         </div>
                       </ModalBody>
                     </Modal>
+                  </td>
+                  <td>
+                    <Button
+                      className={styles.button}
+                      id="UncontrolledPopover"
+                      type="button"
+                    >
+                      Pool
+                    </Button>
+                    <UncontrolledPopover
+                      placement="left"
+                      target="UncontrolledPopover"
+                      trigger="legacy"
+                    >
+                      <PopoverHeader>Current Inventory</PopoverHeader>
+                      <PopoverBody>
+                        <Table>
+                          <tbody>
+                            <tr>
+                              <th>Size</th>
+                              <th>Color</th>
+                              <th>Quantity</th>
+                            </tr>
+                            {product.inventory.map((inv, i) => (
+                              <tr key={i}>
+                                <td>{inv.size}</td>
+                                <td>{inv.color}</td>
+                                <td>{inv.quantity}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </Table>
+                      </PopoverBody>
+                    </UncontrolledPopover>
                   </td>
                 </tr>
               ))}
