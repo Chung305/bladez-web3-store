@@ -9,6 +9,13 @@ export default function HeadComponent() {
 
       <title>Crypto Bladez Store</title>
       <link rel="icon" href="/favicon.ico" />
+
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Russo+One&display=swap"
+        rel="stylesheet"
+      />
       <meta name="title" content="Solana Pay Store" />
       <meta
         name="description"
