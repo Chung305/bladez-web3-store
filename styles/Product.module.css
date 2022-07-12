@@ -18,6 +18,10 @@
   background-color: #141414;
 }
 
+.modal_product_image {
+  width: 400px
+}
+
 .product_details{
   display: flex;
   flex-direction: column;
@@ -51,4 +55,22 @@
 
 .product_price{
   font-size: 14px;
+}
+.modalBody {
+  display: flex;
+}
+.productDetails {
+  margin: 10px;
+}
+.productDetails span {
+  margin-right: 10px;
+}
+.productDetailsSpacing {
+  margin-bottom: 20px;
+}
+/* .modal{
+  width: 80%;
+} */
+.modalFormContainer {
+  margin: 20px;
 }
