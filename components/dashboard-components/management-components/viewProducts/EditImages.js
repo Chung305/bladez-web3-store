@@ -8,16 +8,19 @@ import {
   Button,
   Spinner,
 } from "reactstrap";
+import { updateProductImage } from "../../../../lib/controller/product";
 
-const EditImages = (imageUrl) => {
-  const { images } = imageUrl;
-
-  const [updatedImages, setUpdatedImages] = useState(images);
+const EditImages = (id, imageUrl) => {
+  const [updatedImages, setUpdatedImages] = useState(id.imageUrl);
   const [loading, setLoading] = useState(false);
 
   const [newImage, setNewImage] = useState(null);
+  console.log(id.imageUrl);
 
-  useEffect(() => {}, [updatedImages]);
+  // useEffect(() => {
+  //   setUpdatedImages(imageUrl);
+  // }, []);
+  //console.log(images);
 
   const addImage = (event) => {
     event.preventDefault();
@@ -26,6 +29,8 @@ const EditImages = (imageUrl) => {
     updatedImages.push(newImage);
     const newArr = updatedImages;
     setUpdatedImages(newArr);
+    console.log(updatedImages);
+    //updateProductImage(id, updatedImages);
 
     setLoading(false);
   };
@@ -35,9 +40,11 @@ const EditImages = (imageUrl) => {
       {loading ? (
         <Spinner>loading...</Spinner>
       ) : (
+        updatedImages &&
         updatedImages.map((image, i) => (
           <Card key={i}>
             <img src={image} />
+
             <Button
               onClick={() => {
                 const update = updatedImages.filter((img) => img != image);
@@ -65,7 +72,13 @@ const EditImages = (imageUrl) => {
       </Form>
 
       <div>
-        <Button onClick={() => {}}>Update</Button>
+        <Button
+          onClick={() => {
+            addImage;
+          }}
+        >
+          Update
+        </Button>
       </div>
     </div>
   );

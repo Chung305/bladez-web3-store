@@ -45,8 +45,8 @@ const ViewProducts = () => {
       fetch("../api/products")
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           setProducts(data);
+          console.log(products);
         });
     };
     setTimeout(() => {
@@ -94,7 +94,10 @@ const ViewProducts = () => {
                         Add/Remove Image
                       </OffcanvasHeader>
                       <OffcanvasBody>
-                        <EditImages images={product.imageUrl} />
+                        <EditImages
+                          id={product.id}
+                          imageUrl={product.imageUrl}
+                        />
                       </OffcanvasBody>
                     </Offcanvas>
                   </td>

@@ -22,6 +22,7 @@ export default function Product({ product }) {
 
   // Toggle for Modal
   const toggle = () => setProductModal(!productModal);
+  console.log(product);
 
   return (
     <div className={styles.product_container}>
