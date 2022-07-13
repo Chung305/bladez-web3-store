@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import {
   Button,
   Modal,
@@ -6,6 +6,7 @@ import {
   ModalHeader,
   ModalFooter,
   Badge,
+  UncontrolledCarousel,
   Form,
   Label,
   Input,
@@ -16,6 +17,7 @@ import Buy from "./Buy";
 export default function Product({ product }) {
   const { id, name, price, description, imageUrl, category, type, inventory } =
     product;
+  const [imageItem, setImageItem] = useState([]);
 
   // Modal open state
   const [productModal, setProductModal] = useState(false);
@@ -24,10 +26,22 @@ export default function Product({ product }) {
   const toggle = () => setProductModal(!productModal);
   console.log(product);
 
+  useEffect(() => {
+    const items = imageUrl.map((image, i) => {
+      return {
+        key: i,
+        src: image,
+      };
+    });
+    console.log(items);
+    setImageItem(items);
+  }, []);
+
   return (
     <div className={styles.product_container}>
       <div>
-        <img className={styles.product_image} src={imageUrl} alt={name} />
+        <UncontrolledCarousel items={[...imageItem]} />
+        {/* <img className={styles.product_image} src={imageUrl[1]} alt={name} /> */}
       </div>
 
       <div className={styles.product_details}>
@@ -36,8 +50,12 @@ export default function Product({ product }) {
         </div>
 
         <div className={styles.product_action}>
-          <div className={styles.product_price}>{price} USDC</div>
-          <Button type="button" onClick={toggle}>
+          <div className={styles.product_price}>${price} USDC</div>
+          <Button
+            className={styles.modalOpenButton}
+            type="button"
+            onClick={toggle}
+          >
             View
           </Button>
           <Modal
@@ -48,7 +66,10 @@ export default function Product({ product }) {
           >
             <ModalHeader toggle={toggle}>{name}</ModalHeader>
             <ModalBody className={styles.modalBody}>
-              <img className={styles.modal_product_image} src={imageUrl} />
+              <div className={styles.modalImages}>
+                <UncontrolledCarousel items={[...imageItem]} />
+              </div>
+
               <div className={styles.productDetails}>
                 <div className={styles.productDetailsSpacing}>
                   {description}
@@ -59,7 +80,7 @@ export default function Product({ product }) {
                 </div>
 
                 <div className={styles.productDetailsSpacing}>
-                  <b>{price} USDC</b>
+                  <b>$ {price} USDC</b>
                 </div>
               </div>
             </ModalBody>
@@ -75,7 +96,7 @@ export default function Product({ product }) {
                     </option>
                   ))}
                 </Input>
-                <Button>Review</Button>
+                <Button>Purchase</Button>
               </Form>
             </div>
           </Modal>

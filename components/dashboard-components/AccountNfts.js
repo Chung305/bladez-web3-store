@@ -23,7 +23,6 @@ export default function AccountNfts({ nfts }) {
   } = nfts;
   // Modal open state
   const [modal, setModal] = useState(false);
-  console.log(nfts);
 
   // Toggle for Modal
   const toggle = () => setModal(!modal);

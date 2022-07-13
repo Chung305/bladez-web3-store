@@ -74,3 +74,10 @@
 .modalFormContainer {
   margin: 20px;
 }
+.modalImages {
+  display: inline;
+  max-width: 500px;
+}
+.modalOpenButton {
+  background-color: #32CD32;
+}

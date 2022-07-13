@@ -17,11 +17,6 @@ const EditImages = (id, imageUrl) => {
   const [newImage, setNewImage] = useState(null);
   console.log(id.imageUrl);
 
-  // useEffect(() => {
-  //   setUpdatedImages(imageUrl);
-  // }, []);
-  //console.log(images);
-
   const addImage = (event) => {
     event.preventDefault();
     setLoading(true);

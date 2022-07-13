@@ -46,7 +46,6 @@ const ViewProducts = () => {
         .then((response) => response.json())
         .then((data) => {
           setProducts(data);
-          console.log(products);
         });
     };
     setTimeout(() => {

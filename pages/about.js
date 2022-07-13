@@ -14,7 +14,8 @@ const About = () => {
 
   return (
     <div className="page-container">
-      <h1>About Us updated </h1>
+      <h1>About </h1>
+      <p>Welcome to the Bladez Club Project</p>
       <div></div>
     </div>
   );
